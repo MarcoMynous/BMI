@@ -13,19 +13,46 @@ const Calculate = () => {
   const [update, setUpdate] = useState(false);
 
   const calculateBMI = () => {
-    if (!weight || (!heightFeet && !heightIn)) {
-      setBmi(0);
-      setCategory("");
-      alert("Please enter in the field");
-      return;
+    setHeightFeet("");
+    setHeightIn("");
+    setHeightCm("");
+    setWeight("");
+    setWeightPounds("");
+
+    if (weightUnit === "kg" && heightUnit === "ft_in") {
+      if (!weight || (!heightFeet && !heightIn)) {
+        setBmi(0);
+        setCategory("");
+        alert("Please enter in the field");
+        return;
+      }
     }
 
-    if (!weightPounds || !heightCm) {
-      setBmi(0);
-      setCategory("");
-      alert("Please enter in the field");
-      return;
+    if (weightUnit === "kg" && heightUnit === "cm") {
+      if (!weight || !heightCm) {
+        setBmi(0);
+        setCategory("");
+        alert("Please enter in the field");
+        return;
+      }
     }
+    if (weightUnit === "ibs" && heightUnit === "ft_in") {
+      if (!weightPounds || (!heightFeet && !heightIn)) {
+        setBmi(0);
+        setCategory("");
+        alert("Please enter in the field");
+        return;
+      }
+    }
+    if (weightUnit === "ibs" && heightUnit === "cm") {
+      if (!weightPounds || !heightCm) {
+        setBmi(0);
+        setCategory("");
+        alert("Please enter in the field");
+        return;
+      }
+    }
+
     setUpdate(true);
 
     const weightInKg =
