@@ -19,6 +19,13 @@ const Calculate = () => {
       alert("Please enter in the field");
       return;
     }
+
+    if (!weightPounds || !heightCm) {
+      setBmi(0);
+      setCategory("");
+      alert("Please enter in the field");
+      return;
+    }
     setUpdate(true);
 
     const weightInKg =
@@ -48,23 +55,39 @@ const Calculate = () => {
 
   const handleWeight = (e) => {
     const value = e.target.value;
-    setWeight(value);
+    if (value === "" || parseFloat(value) >= 0) {
+      setWeight(value);
+    }
   };
 
   const handleFeetChange = (e) => {
     const value = e.target.value;
-    setHeightFeet(value);
+    if (value === "" || parseInt(value, 10) >= 0) {
+      setHeightFeet(value);
+    }
   };
 
   const handleCmChange = (e) => {
     const value = e.target.value;
-    setHeightCm(value);
+    if (value === "" || parseFloat(value) >= 0) {
+      setHeightCm(value);
+    }
   };
 
   const handleInChange = (e) => {
     const value = e.target.value;
-    if (value === "" || parseInt(value, 10) < 12) {
+    if (
+      value === "" ||
+      (parseInt(value, 10) >= 0 && parseInt(value, 10) < 12)
+    ) {
       setHeightIn(value);
+    }
+  };
+
+  const HandleWeightPound = (e) => {
+    const value = e.target.value;
+    if (value === "" || parseFloat(value) >= 0) {
+      setWeightPounds(value);
     }
   };
 
@@ -90,14 +113,14 @@ const Calculate = () => {
                 type="number"
                 placeholder="Ibs"
                 value={weightPounds}
-                onChange={(e) => setWeightPounds(e.target.value)}
+                onChange={HandleWeightPound}
                 className="px-3 py-2 w-11/12 border-none focus:outline-none text-lg text-black"
               />
             )}
 
             <select
               value={weightUnit}
-              onChange={(e) => setWeightUnit(e.target.value)}
+              onChange={HandleWeightPound}
               className="border-none px-3 py-2 bg-gray-100 text-black text-lg focus:outline-none"
             >
               <option value="kg">Kg</option>
@@ -112,20 +135,20 @@ const Calculate = () => {
             }`}
           >
             {heightUnit === "ft_in" ? (
-              <div className="  flex justify-between">
+              <div className="flex flex-col justify-between">
                 <input
                   type="number"
                   placeholder="feet"
                   value={heightFeet}
                   onChange={handleFeetChange}
-                  className=" px-3 py-2 w-5/12 border-l-2 border-r-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
+                  className=" px-2 py-2 w-4/5 border-l-2 border-r-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
                 />
                 <input
                   type="number"
                   placeholder="inches"
                   value={heightIn}
                   onChange={handleInChange}
-                  className="px-3 py-2 w-5/12 border-r-2 border-l-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
+                  className="px-2 py-2 w-4/5 sm:min-w-9 border-r-2 border-l-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
                 />
               </div>
             ) : (
@@ -134,13 +157,13 @@ const Calculate = () => {
                 placeholder="cm"
                 value={heightCm} // Reuse heightFeet for simplicity
                 onChange={handleCmChange}
-                className="px-3 py-2 w-11/12 border-none focus:outline-none text-md text-black"
+                className="px-3 py-2 w-11/12  border-none focus:outline-none text-md text-black"
               />
             )}
             <select
               value={heightUnit}
               onChange={(e) => setHeightUnit(e.target.value)}
-              className="border-none ml-0.5 px-3 py-2 bg-gray-100 text-black text-lg focus:outline-none"
+              className="border-none ml-0.5 px-2 py-2 bg-gray-100 text-black text-lg focus:outline-none"
             >
               <option value="ft_in">ft-in</option>
               <option value="cm">cm</option>
