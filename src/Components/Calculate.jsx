@@ -120,7 +120,7 @@ const Calculate = () => {
 
             <select
               value={weightUnit}
-              onChange={HandleWeightPound}
+              onChange={(e) => setWeightUnit(e.target.value)}
               className="border-none px-3 py-2 bg-gray-100 text-black text-lg focus:outline-none"
             >
               <option value="kg">Kg</option>
