@@ -13,13 +13,9 @@ const Calculate = () => {
   const [update, setUpdate] = useState(false);
 
   const calculateBMI = () => {
-    setHeightFeet("");
-    setHeightIn("");
-    setHeightCm("");
-    setWeight("");
-    setWeightPounds("");
-
     if (weightUnit === "kg" && heightUnit === "ft_in") {
+      setHeightCm("");
+      setWeightPounds("");
       if (!weight || (!heightFeet && !heightIn)) {
         setBmi(0);
         setCategory("");
@@ -29,6 +25,9 @@ const Calculate = () => {
     }
 
     if (weightUnit === "kg" && heightUnit === "cm") {
+      setHeightFeet("");
+      setHeightIn("");
+      setWeightPounds("");
       if (!weight || !heightCm) {
         setBmi(0);
         setCategory("");
@@ -37,6 +36,8 @@ const Calculate = () => {
       }
     }
     if (weightUnit === "ibs" && heightUnit === "ft_in") {
+      setHeightCm("");
+      setWeight("");
       if (!weightPounds || (!heightFeet && !heightIn)) {
         setBmi(0);
         setCategory("");
@@ -45,6 +46,9 @@ const Calculate = () => {
       }
     }
     if (weightUnit === "ibs" && heightUnit === "cm") {
+      setHeightFeet("");
+      setHeightIn("");
+      setWeight("");
       if (!weightPounds || !heightCm) {
         setBmi(0);
         setCategory("");
@@ -148,7 +152,7 @@ const Calculate = () => {
             <select
               value={weightUnit}
               onChange={(e) => setWeightUnit(e.target.value)}
-              className="border-none px-3 py-2 bg-gray-100 text-black text-lg focus:outline-none"
+              className="border-none px-3 py-2 bg-gray-100 cursor-pointer text-black text-lg focus:outline-none"
             >
               <option value="kg">Kg</option>
               <option value="ibs">Ibs</option>
@@ -168,14 +172,14 @@ const Calculate = () => {
                   placeholder="feet"
                   value={heightFeet}
                   onChange={handleFeetChange}
-                  className=" px-2 py-2 w-4/5 border-l-2 border-r-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
+                  className=" px-2 py-2 w-4/5 mb-1 border-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
                 />
                 <input
                   type="number"
                   placeholder="inches"
                   value={heightIn}
                   onChange={handleInChange}
-                  className="px-2 py-2 w-4/5 sm:min-w-9 border-r-2 border-l-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
+                  className="px-2 py-2 w-4/5 sm:min-w-9 border-2  hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
                 />
               </div>
             ) : (
@@ -190,7 +194,7 @@ const Calculate = () => {
             <select
               value={heightUnit}
               onChange={(e) => setHeightUnit(e.target.value)}
-              className="border-none ml-0.5 px-2 py-2 bg-gray-100 text-black text-lg focus:outline-none"
+              className="border ml-0.5 px-2 py-2 bg-gray-100 text-black text-lg focus:outline-none cursor-pointer rounded-lg"
             >
               <option value="ft_in">ft-in</option>
               <option value="cm">cm</option>
@@ -198,7 +202,7 @@ const Calculate = () => {
           </div>
           {/* </div> */}
           <button
-            className="mt-4 py-2 px-2 bg-blue-500 w-fit place-self-center rounded-2xl text-white font-semibold"
+            className="mt-4 py-2 px-2 bg-blue-500 hover:bg-blue-300 w-fit place-self-center rounded-2xl text-white font-semibold"
             onClick={calculateBMI}
           >
             Calculate BMI
