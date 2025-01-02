@@ -12,6 +12,50 @@ const Calculate = () => {
   const [weightUnit, setWeightUnit] = useState("kg");
   const [update, setUpdate] = useState(false);
 
+  const preventInvalidInput = (event) => {
+    if (["e", "E", "-", "+"].includes(event.key)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleWeight = (e) => {
+    const value = e.target.value;
+    if (value === "" || parseFloat(value) >= 0) {
+      setWeight(value);
+    }
+  };
+
+  const handleFeetChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || parseInt(value, 10) >= 0) {
+      setHeightFeet(value);
+    }
+  };
+
+  const handleCmChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || parseFloat(value) >= 0) {
+      setHeightCm(value);
+    }
+  };
+
+  const handleInChange = (e) => {
+    const value = e.target.value;
+    if (
+      value === "" ||
+      (parseInt(value, 10) >= 0 && parseInt(value, 10) < 12)
+    ) {
+      setHeightIn(value);
+    }
+  };
+
+  const HandleWeightPound = (e) => {
+    const value = e.target.value;
+    if (value === "" || parseFloat(value) >= 0) {
+      setWeightPounds(value);
+    }
+  };
+
   const calculateBMI = () => {
     if (weightUnit === "kg" && heightUnit === "ft_in") {
       setHeightCm("");
@@ -84,44 +128,6 @@ const Calculate = () => {
     else if (bmiResult >= 30) setCategory("Obesity");
   };
 
-  const handleWeight = (e) => {
-    const value = e.target.value;
-    if (value === "" || parseFloat(value) >= 0) {
-      setWeight(value);
-    }
-  };
-
-  const handleFeetChange = (e) => {
-    const value = e.target.value;
-    if (value === "" || parseInt(value, 10) >= 0) {
-      setHeightFeet(value);
-    }
-  };
-
-  const handleCmChange = (e) => {
-    const value = e.target.value;
-    if (value === "" || parseFloat(value) >= 0) {
-      setHeightCm(value);
-    }
-  };
-
-  const handleInChange = (e) => {
-    const value = e.target.value;
-    if (
-      value === "" ||
-      (parseInt(value, 10) >= 0 && parseInt(value, 10) < 12)
-    ) {
-      setHeightIn(value);
-    }
-  };
-
-  const HandleWeightPound = (e) => {
-    const value = e.target.value;
-    if (value === "" || parseFloat(value) >= 0) {
-      setWeightPounds(value);
-    }
-  };
-
   return (
     <div>
       <h1 className="text-xl font-semibold text-gray-500">
@@ -137,6 +143,7 @@ const Calculate = () => {
                 placeholder="Kg"
                 value={weight}
                 onChange={handleWeight}
+                onKeyDown={preventInvalidInput}
                 className=" px-3 py-2 w-11/12  border-none focus:outline-none text-md text-black"
               />
             ) : (
@@ -145,6 +152,7 @@ const Calculate = () => {
                 placeholder="Ibs"
                 value={weightPounds}
                 onChange={HandleWeightPound}
+                onKeyDown={preventInvalidInput}
                 className="px-3 py-2 w-11/12 border-none focus:outline-none text-lg text-black"
               />
             )}
@@ -171,6 +179,7 @@ const Calculate = () => {
                   placeholder="feet"
                   value={heightFeet}
                   onChange={handleFeetChange}
+                  onKeyDown={preventInvalidInput}
                   className=" px-2 py-2 w-5/6 mb-1 border-2 hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
                 />
                 <input
@@ -178,6 +187,7 @@ const Calculate = () => {
                   placeholder="inches"
                   value={heightIn}
                   onChange={handleInChange}
+                  onKeyDown={preventInvalidInput}
                   className="px-2 py-2 w-5/6 border-2  hover:border-gray-200 focus:outline-none text-md text-black rounded-lg"
                 />
               </div>
@@ -187,6 +197,7 @@ const Calculate = () => {
                 placeholder="cm"
                 value={heightCm}
                 onChange={handleCmChange}
+                onKeyDown={preventInvalidInput}
                 className="px-3 py-2 w-11/12 rounded-none border-none focus:outline-none text-md text-black"
               />
             )}
