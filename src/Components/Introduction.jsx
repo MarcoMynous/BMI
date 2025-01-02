@@ -6,7 +6,7 @@ const Introduction = () => {
       <h1 className="my-5 text-xl font-semibold place-self-center">
         Understanding Body Mass Index (BMI) and how to calculate it
       </h1>
-      <div className="max-w-[650px] place-self-center border border-gray-200 py-4 px-5 pb-7 shadow rounded-3xl mb-6">
+      <div className="max-w-[650px] place-self-center border border-gray-200 py-4 px-4 pb-7 shadow rounded-3xl mb-6 flex flex-col">
         <h1 className="mb-2 text-lg font-semibold">What is BMI?</h1>
         <p>
           Body Mass Index (BMI) is a measurement of a person's leanness or
